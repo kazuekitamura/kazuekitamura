@@ -1,0 +1,438 @@
+body {
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-image:url("../imgs/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1000px;
+    height: 1000px;
+    text-align: center;
+    position: relative;
+  }
+ 
+/* 携帯画像 */
+.img1 {
+    width: 360px;
+    z-index: 2;
+    position: absolute;
+}
+
+/* 山のイラスト */
+.img2 {
+    width: 300px;
+    z-index: 4;
+    position: relative;
+    top: 10px;
+    left: 5px    
+}
+
+/* 携帯画面背景 */
+.view{
+    background-color: #ebebeb;
+    width: 315px;
+    height: 679px;
+    margin-top: 50px;
+    margin-left: 520px;
+    z-index: 3;
+    position: relative;
+    top: 16px;
+    border-radius: 2em;
+}
+
+.main {
+    height: 600px;
+}
+  
+header {
+    background: #4949ac;
+    height: 70px;
+    display: flex;
+    border-radius: 2em 2em 0 0;
+  }
+
+/* チャットルームNoとIDの表示  */
+.name{
+    display: flex;
+
+}
+/* チャットルームNo */
+  h1{
+    font-size: 16px;
+    text-align: center;
+    margin: 20px;
+    color: #dde6ec;
+    margin: 30px 20px 0 0;
+  }
+
+  h2{
+    font-size: 30px;
+    text-align: center;
+    margin: 20px;
+    color: #dde6ec;
+  }
+  
+  /* メイン画面 フッター固定*/
+  
+
+  /*チャットのフィールド*/
+  #field {
+    width: 100%;
+    height: 400px;
+    padding: 7px 0 14px;
+    box-sizing: border-box;
+    background-color: #81AECF;
+    /*横向きのスクロール禁止*/
+    overflow-x: hidden;
+    /*縦向きのスクロール許可*/
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    /*IE、Edgeでスクロールバーを非表示にする*/
+    -ms-overflow-style: none;
+    background: url("../imgs/m_01.jpg");  
+  }
+  #nav-drawer {
+    position: relative;
+    margin: 10px;
+  }
+  
+  /*チェックボックス等は非表示に*/
+  .nav-unshown {
+    display:none;
+  }
+  
+  /*アイコンのスペース*/
+  #nav-open {
+    display: inline-block;
+    width: 30px;
+    height: 22px;
+    vertical-align: middle;
+    margin: 15px;
+  }
+  
+  /*ハンバーガーアイコン*/
+  #nav-open span, #nav-open span:before, #nav-open span:after {
+    position: absolute;
+    height: 3px;/*線の太さ*/
+    width: 25px;/*長さ*/
+    border-radius: 3px;
+    background: #aea2f3;
+    display: block;
+    content: '';
+    cursor: pointer;
+  }
+  #nav-open span:before {
+    bottom: -8px;
+  }
+  #nav-open span:after {
+    bottom: -16px;
+  }
+  
+  /*閉じる用の薄黒カバー*/
+  #nav-close {
+    display: none;/*はじめは隠しておく*/
+    position: fixed;
+    z-index: 99;
+    top: 0;/*全体に広がるように*/
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    transition: .01s ;
+  }
+  
+  /*中身*/
+  #nav-content {
+    position: relative;  
+    overflow: auto;
+    position: fixed;
+    top: 130px;
+    z-index: 9999;/*最前面に*/
+    width: 200px;/*右側に隙間を作る（閉じるカバーを表示）*/
+    height: 400px;
+    background: rgb(247, 224, 203);
+    transition: .01s;/*表示*/
+    transform: translateX(-400%);/* 左に隠しておく */
+    border-radius: 0.5em;
+    font-size: 16px;
+    letter-spacing: .1em;
+    line-height: 3em;
+    text-align: left;
+    margin: 5px 0 0 -10px;;
+  }
+  
+  /*チェックが入ったらもろもろ表示*/
+  #nav-input:checked ~ #nav-close {
+    display: block;/*カバーを表示*/
+    opacity: .5;
+  }
+  
+  #nav-input:checked ~ #nav-content {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);/*中身を表示（右へスライド）*/
+    box-shadow: 6px 0 25px rgba(0,0,0,.15);
+  }
+  
+  /* 検索メニュー */
+  .search-area input[type="text"] {
+    padding: 5px 5px 3px;
+    font-size: 16px;
+    border: 1px solid #D6D6D6;
+    margin: 20px 10px;
+  }
+  
+  .search-area input[type="text"]:focus {
+    background: #F9F9F9;
+  }
+  
+  .search-result {
+    margin-top: 20px;
+  }
+  
+  .hit-num__text span {
+    font-weight: bold;
+  }
+  
+  #search-result__list {
+    margin-top: 15px;
+  }
+  
+  #search-result__list span {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 5px;
+    background: #F2F2F2;
+  }
+  
+  .target-area {
+    margin-top: 20px;
+  }
+  
+  .target-area .hidden {
+    display: none
+  }
+
+  /* メニューリストボタンを消す */
+#map {
+  margin-top:0.5em;
+  padding:0.6em;
+  border: none;
+  background: rgb(247, 224, 203);
+}
+  
+  /* ここからフッター */
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    
+  }
+  
+  /* スタンプ */
+  #c-img1,#m-img1{
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  
+  #c-img2 {
+    width: 150px;
+    height: 150px;
+    display: none;
+    border-radius: 6px;
+    margin-left: 200px;
+    
+  }
+  .hidden_box {
+    margin: 1em 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  /*ボタン装飾*/
+  .hidden_box label {
+    padding: 10px;
+    font-weight: bold;
+    background: #d8d7d7;;
+    border-radius: 1em;
+    cursor :pointer;
+    transition: .5s;
+    margin-left: 10px;
+  }
+  
+  /*アイコンを表示*/
+  .hidden_box label:before {
+    display: inline-block;
+    content: '\f078';
+    font-family: 'FontAwesome';
+    padding-right: 5px;
+    transition: 0.2s;
+  }
+  
+  /*ボタンホバー時*/
+  .hidden_box label:hover {
+    background: silver;
+  }
+  
+  /*アイコンを切り替え*/
+  .hidden_box input:checked + label:before {
+      content: '\f00d';
+      -ms-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+      color: #668ad8;
+  }
+  
+  /*チェックは見えなくする*/
+  .hidden_box input {
+    display: none;
+  }
+  
+  /*中身を非表示にしておく*/
+  .hidden_box .hidden_show {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.8s;
+    margin-left: 20px;
+  }
+  
+  /*クリックで中身表示*/
+  .hidden_box input:checked + label + .hidden_show {
+    padding: 10px 0;
+    height: auto;
+    opacity: 1;
+  }
+  
+  /*Chrome、Safariでスクロールバーを非表示にする*/
+  #field::-webkit-scrollbar {
+    display:none;
+  }
+  
+  
+  /* 入力フオームと送信ボタン */
+  #input-field{
+    width: 380px;
+    height: 40px;
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  /*入力する場所*/
+  #chatinput{
+    height: 30px;
+    width: 210px;
+    display: block;
+    font-size: 15px;
+    color: #000;
+    box-sizing: border-box;
+    border: 1px solid #777;
+    border-radius: 4px;
+    padding-left: 10px;
+    margin: auto 10px;
+  }
+
+  #chat_form:focus{
+    border: 1.3px solid #8873FF;
+    outline: 0;
+  }
+  /*送信ボタン*/
+  /*デフォルトのボーダーを消す*/
+  #chat-button {
+    cursor: pointer;
+    height: 30px;
+    width: 20%;
+    font-size: 18px;
+    background: #6e55fb;
+    color: white;
+    display: block;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.5px;
+    font-size: 16px;
+    margin-top: 4px;  
+  }
+  
+  #chat-button:focus{
+    outline: 0;
+    background: #A899FF;
+  }
+  
+  #chat-ul{
+    /*ulのデフォルの隙間を消す*/
+    padding: 0;
+    list-style: none;
+  }
+  #chat-ul > li{
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+    word-wrap: break-word;
+  }
+  
+  #chat-ul > li > div{
+    display: inline-block;
+    box-sizing: border-box;
+    color: #000;
+    border-radius: 6px;
+    min-height: 23px;
+    max-width: 150px;
+    padding: 7px 13px;
+    font-size: 15px;
+    line-height: 1.2em;
+  }
+  /*自分の吹き出し*/
+  .chat-right{
+    margin-right: 15px;
+    background: #A4E496;
+    text-align: left;
+  }
+  /*吹き出しの矢印部分: ひし形*/
+  .chat-right::before{
+    display: block;
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    top: 50%;
+    right: 0;
+    margin-right: 7px;
+    /*skewで歪ませ、rotateで回転*/
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform: Trotate(45deg) skew(-10deg, -10deg);
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform-origin: 100% 0%;
+    background: #A4E496;
+  }
+  /*相手の吹き出しのデザイン*/
+  .chat-left{
+    margin-left: 15px;
+    background: #FFF;
+  }
+  .chat-left::before{
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    display: block;
+    top: 50%;
+    margin-left: -14px;
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform: rotate(45deg) skew(-10deg, -10deg);
+    transform-origin: 100% 0%;
+    background: #FFF;
+  }
+  .left{
+  text-align: left;
+  }
+  .right{
+  text-align: right;
+  }  

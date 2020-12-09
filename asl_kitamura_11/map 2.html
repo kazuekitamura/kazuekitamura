@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/map.css">
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <title>Mt.G's Map</title>
+</head>
+<body>
+   <!-- 携帯のイラスト    -->
+   <div class="iphone">
+    <img src="imgs/iponeX.png" class="img1">
+  </div>
+  <div class="view">
+    <div class=inbody>
+  <header>
+    <!-- ハンバーガーメニュー   -->  
+    <div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+        <div class="wrapper">
+          <div class="search-area">
+            <form>
+              <input type="text" id="search-text" placeholder="検索ワードを入力">
+            </form>
+            <div class="search-result">
+              <div class="search-result__hit-num"></div>
+              <div id="search-result__list"></div>
+            </div>
+          </div>          
+          <ul class="target-area">
+            <li><a href="map.html">MAP</a></li>
+              <li><a href="">お天気</a></li>
+              <li><a href="chat.html">ChatRoom</a></li>
+              <li><a href="">登山計画書</a></li>
+              <li><a href="">送信履歴</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <h1>MAP</h1>  
+  </header>
+<main>
+    <!-- コンテンツ表示画面 -->
+    <div id="main-field">
+      <div id="gmap"></div><!-- 地図を表示する領域 -->   
+      <div id="map_custmomize"></div>    
+    </div>
+</main>
+<footer>
+      <!-- マップ情報イベント -->
+  <div id="gmap"></div>
+    <div id="iw_wrapper">
+        <ol id="infowindw_1">
+          <h3>クマに注意！</h3>
+          <li>2020/11/12</li>
+          <li>槍沢付近で目撃情報</li>
+          <img src="../asl_kitamura_11/imgs/kuma.jpg" alt="" class="img3">
+          </ol>
+          <ol id="infowindw_2">
+          <h3>紅葉が見頃！</h3>
+          <li>9月下旬〜10月上旬</li>
+          <li></li>
+          <a href="https://www.kamikochi.or.jp/article/show/153">涸沢周辺</a>
+          <img src="../asl_kitamura_11/imgs/m_04.png" alt="" class="img3">
+        </ol>
+    </div>
+</footer>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+      apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+      authDomain: "g-skitamura.firebaseapp.com",
+      databaseURL: "https://g-skitamura.firebaseio.com",
+      projectId: "g-skitamura",
+      storageBucket: "g-skitamura.appspot.com",
+      messagingSenderId: "469764883470",
+      appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+    };
+      
+      firebase.initializeApp(firebaseConfig);
+</script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDAHMjXrLmbR2xJuw3vsDUxRDhu8bOj3OM&callback=initMap" async defer></script>
+    
+  <script src='map.js'></script>
+</body>
+</html>

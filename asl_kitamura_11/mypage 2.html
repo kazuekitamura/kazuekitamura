@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <link rel="stylesheet" href="css/mypage.css">
+<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Mt.G's_Mypage</title>
+  </head>
+  
+<body>
+  <!-- 携帯のイラスト    -->
+  <div class="iphone">
+    <img src="imgs/iponeX.png" alt=""class="img1">
+  </div>
+  <div class="view">
+<header>
+  <!-- 山のイラスト     -->
+  <img src="imgs/m_02.png" alt=""class="img2">
+  <div class="wrapper">My Page</div>
+  <h1></h1></header>
+<main>
+  <!-- 友達検索・リストの切替ボタン -->     
+  <div class="form-modal">
+    <div class="form-toggle">
+      <button id="search-toggle" onclick="toggleSearch()">Friends<br>Search</button>
+      <button id="list-toggle" onclick="toggleList()">Mymenu<br>List</button>
+      </div>
+    <!-- 友達検索 -->
+    <div id="search-form">
+      <form>
+        <input type="text" id='friend_id' placeholder="Choose friend id /お友達ID"/>
+        <button type="button" id='search'>search/お友達検索</button>
+        <!-- <div class="friend">友達一覧</div> -->
+          <div id='friends_list'></div>           
+      </form>
+      <!-- 検索結果表示  -->
+      <div id='search_result'></div>
+        <!-- お友達リスト -->
+    </div>    
+    <div id="list-form">
+      <form>
+        <div id="nav-content">
+          <div class="min_wrapper">
+            <div class="search-area">
+              <form>
+                <input type="text" id="search-text" placeholder="検索ワードを入力">
+              </form>
+              <div class="search-result">
+                <div class="search-result__hit-num"></div>
+                <div id="search-result__list"></div>
+              </div>
+            </div>          
+            <ul class="target-area">
+              <li><a href="map.html">MAP</a></li>
+              <li><a href="">お天気</a></li>
+              <li><a href="chat.html">ChatRoom</a></li>
+              <li><a href="">登山計画書</a></li>
+              <li><a href="">送信履歴</a></li>
+            </ul>
+          </div>
+        </div>
+      </form>  
+    </div>
+  </div>
+  <div class="logout-form">     
+  <button id="logout">Logout</button>
+  </div>   
+</main>
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+<!--** 以下Firebase **-->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+<script>
+  var firebaseConfig = {
+apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+authDomain: "g-skitamura.firebaseapp.com",
+databaseURL: "https://g-skitamura.firebaseio.com",
+projectId: "g-skitamura",
+storageBucket: "g-skitamura.appspot.com",
+messagingSenderId: "469764883470",
+appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+};
+firebase.initializeApp(firebaseConfig);
+
+
+    </script>
+
+    <script src='mypage.js'></script>
+
+  </body>
+</html>

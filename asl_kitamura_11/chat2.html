@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/chat.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<title>Mt.G'sやまびこ</title>
+</head>
+<body>
+     <!-- 携帯のイラスト    -->
+  <div class="iphone">
+    <img src="imgs/iponeX.png" alt=""class="img1">
+  </div>
+  <div class="view">
+<div class=inbody>  
+<header>
+    <!-- ハンバーガーメニュー   -->  
+  <div id="nav-drawer">
+    <input id="nav-input" type="checkbox" class="nav-unshown">
+    <label id="nav-open" for="nav-input"><span></span></label>
+    <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+    <div id="nav-content">
+      <div class="wrapper">
+        <div class="search-area">
+          <form>
+            <input type="text" id="search-text" placeholder="検索ワードを入力">
+          </form>
+          <div class="search-result">
+            <div class="search-result__hit-num"></div>
+            <div id="search-result__list"></div>
+          </div>
+        </div>          
+        <ul class="target-area">
+            <li><a href="map.html">MAP</a></li>
+              <li><a href="">お天気</a></li>
+              <li><a href="chat.html">ChatRoom</a></li>
+              <li><a href="">登山計画書</a></li>
+              <li><a href="">送信履歴</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <div class="name"><h1></h1><h2></h2></div>   
+</header>
+<main>
+  <!-- コンテンツ表示画面 -->
+    <div id="main-field">
+      <div id="field">
+      <ul id="chat-ul"></ul>
+      <img src="imgs/kuma.jpg" id="c-img2"><!--非表示-->
+    </div>       
+</main>
+  <!--入力場所，送信ボタン-->
+<footer>
+  <div class="box">
+      <id id="input-field">
+      <input type="text" id="chatinput" value="">
+      <input type="button" value= "送信" id="chat-button" onclick= "btnFunc()">
+    </div>
+    <div class="hidden_box">
+      <input type="checkbox" id="label1" />
+      <label for="label1"></label>
+      <div class="hidden_show">
+      <!--非表示ここから-->
+      <img src="imgs/kuma.jpg" id="c-img1">
+            <img src="imgs/m_06.png" id="m-img1">
+            <div id="result"></div>     
+      <!--ここまで-->
+    </div>    
+  </div>
+</div>
+</footer>
+</div>
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+<!-- MAPKEY -->
+​<script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCj-YtUQm8S6dCvFmsNsW9y9px8JG35F7c&callback=initMap" async defer></script>
+<!--** 以下Firebase **-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+​
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+    authDomain: "g-skitamura.firebaseapp.com",
+    databaseURL: "https://g-skitamura.firebaseio.com",
+    projectId: "g-skitamura",
+    storageBucket: "g-skitamura.appspot.com",
+    messagingSenderId: "469764883470",
+    appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+  };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+  const ref = firebase.database().ref();
+
+// 検索メニュー  
+  $(function () {
+  searchWord = function(){
+    var searchText = $(this).val(), // 検索ボックスに入力された値
+        targetText;
+
+    $('.target-area li').each(function() {
+      targetText = $(this).text();
+
+      // 検索対象となるリストに入力された文字列が存在するかどうかを判断
+      if (targetText.indexOf(searchText) != -1) {
+        $(this).removeClass('hidden');
+      } else {
+        $(this).addClass('hidden');
+      }
+    });
+  };
+
+  // searchWordの実行
+  $('#search-text').on('input', searchWord);
+});
+
+//ユーザーの位置情報を取得
+function setLocation(pos){
+
+// 緯度・経度を取得
+lat = pos.coords.latitude;
+lon = pos.coords.longitude;
+
+// 緯度・経度を表示
+document.getElementById("table_lat").innerHTML = lat;
+document.getElementById("table_lon").innerHTML = lon;
+
+// google map へ表示するための設定
+latlon = new google.maps.LatLng(lat,lon);
+map = document.getElementById("map");
+opt = {
+  zoom: 17,
+  center: latlon,
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+  scrollwheel: false,
+  scaleControl: true,
+  disableDoubleClickZoom: true,
+  draggable: false
+};
+
+// google map 表示
+mapObj = new google.maps.Map(map, opt);
+
+// マーカーを設定
+marker = new google.maps.Marker({
+  position: latlon,
+  map: mapObj
+});
+
+}
+
+// エラー時に呼び出される関数
+function showErr(err){
+switch(err.code){
+  case 1 : alert("位置情報の利用が許可されていません"); break;
+  case 2 : alert("デバイスの位置が判定できません"); break;
+  case 3 : alert("タイムアウトしました"); break;
+  default : alert(err.message);
+}
+}
+
+// geolocation に対応しているか否かを確認
+if("geolocation" in navigator){
+var opt = {
+  "enableHighAccuracy": true,
+  "timeout": 10000,
+  "maximumAge": 0,
+};
+navigator.geolocation.getCurrentPosition(setLocation, showErr, opt);
+}else{
+alert("ブラウザが位置情報取得に対応していません");
+}  
+  
+  $("#chat-button").on("click",function(){
+    const uname = $("#uname").val();
+      const text  = $("#chatinput").val();
+      let d = new Date();
+      console.log(d.toString());
+        let year = d.getFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let dayofweek = d.getDay();
+        const dayname = ['日','月','火','水','木','金','土'];
+        console.log(year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']');
+        console.log(d.toString());
+        let hour = d.getHours();
+        let minute = d.getMinutes();
+        let second = d.getSeconds();
+        let millisecond = d.getMilliseconds();
+        console.log(hour + '時' + minute + '分' + second + '.' + millisecond + '秒');
+        console.log(uname+text+year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']');
+        const msg = {
+          uname: uname,
+          text: text,
+          date: year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']',
+          time: hour + '時' + minute + '分' + second + '.' + millisecond + '秒'
+      };
+      ref.push(msg); //firebase関数
+  });
+  
+  //送信処理
+  $("#chat-button").on("click",function(){
+      const uname = $("#uname").val();
+      const text = $("#chatinput").val();
+      const lat = $("#lat").val();
+      const lon = $("#lon").val();
+      const msg = {
+          uname: uname,
+          text: text,
+      };
+      ref.push(msg);
+  });
+  
+  $("#chatinput").on("keydown",function(e){
+      console.log(e);
+      if(e.keyCode==13){
+        const uname = $("#uname").val();
+        const text = $("#chatinput").val();
+      //   const lat = $("#lat").val();
+      // const lon = $("#lon").val();
+        const msg = {
+            uname: uname,
+            text: text,
+        };
+        ref.push(msg);
+      }
+  });
+  
+// 受信処理
+ref.on("child_added",function(data){
+      const v = data.val();
+      const k = data.key;
+      const h = '<p>'+v.uname+'<br>'+v.text+'<br>'+v.date+'<br>'+v.time+'</p>';
+      $("#output").append(h).animate(
+        { scrollTop: $("#output").get(0).scrollHeight },
+    );;
+  });
+
+// ロボットの返答内容
+const chat = [
+    'Hi! ジーズ山にようこそ!',
+    'お名前を教えてください ',
+    '気をつけていってらっしゃい！',
+    [['Alright !'], ['Oh really!'], ['Ok!']]// ランダムな返答
+];
+
+
+// ロボットの返信の合計回数（最初は0）
+// これを利用して、自分が送信ボタンを押したときの相手の返答を配列から指定する
+let chatCount = 0;
+
+
+// 画面への出力
+// valはメッセージ内容，personは誰が話しているか
+function output(val, person) {
+    // 一番下までスクロール
+    const field = document.getElementById('field');
+    field.scroll(0, field.scrollHeight - field.clientHeight);
+  
+    const ul = document.getElementById('chat-ul');
+    const li = document.createElement('li');
+    // このdivにテキストを指定
+    const div = document.createElement('div');
+    const imgs = document.getElementById('c-imgs');
+    div.textContent = val;
+    
+    if (person === 'me') { // 自分
+        div.classList.add('chat-right');
+        li.classList.add('right');
+        ul.appendChild(li);
+        li.appendChild(div);
+    }else if (person === 'robot') { // 相手
+        // ロボットが2個連続で返信してくる時、その間は返信不可にする
+        // なぜなら、自分の返信を複数受け取ったことになり、その全てに返信してきてしまうから
+        // 例："Hi!〇〇!"を複数など
+        // （今回のロボットの連続返信は2個以内とする）
+        chatBtn.disabled = true;
+        setTimeout( ()=> {
+            chatBtn.disabled = false;
+            li.classList.add('left');
+            div.classList.add('chat-left');
+            ul.appendChild(li);
+            li.appendChild(div);
+            // ロボットのトークの合計数に1足す
+            chatCount++;
+        }, 2000); 
+    }
+}
+
+
+const chatBtn = document.getElementById('chat-button');
+const inputText = document.getElementById('chatinput');
+
+// 送信ボタンを押した時の処理
+function btnFunc() {
+    if (!inputText.value) return false;
+    // 自分のテキストを送信
+    output(inputText.value, 'me');
+  
+    setTimeout( ()=> {
+        // 入力内を空欄にする
+        // 一瞬の間でvalueを取得し、ロボットの"Hi!〇〇!"の返信に利用
+        // 送信ボタンを押した瞬間にvalueを消したら、やまびこに失敗した
+        inputText.value = '';
+    }, 1);
+  
+    //ロボットの送信の合計回数に応じて次の返信を指定
+    switch(chatCount) {
+        // もしロボットのトーク数が2個の時に送信ボタンが押されたら、
+        // 名前のやまびこと、chat配列の2（3個目）が返信
+        case 2:
+            output('Hi, ' + inputText.value + ' !', 'robot');
+            setTimeout( ()=> {
+                output(chat[2], 'robot');
+            }, 2000);
+            break;
+        
+        // もしロボットのトーク数が4個の時に送信ボタンが押されたら、
+        // chat配列の3（4個目）のランダム番目が返信
+        case 4:
+            output(chat[3][Math.floor(Math.random() * chat[3].length)], 'robot');
+            break;
+        
+        // それ以降はやまびこ
+        default:
+            output(inputText.value, 'robot');
+            break;
+    }
+}
+
+// 最初に2つロボットから話しかけられる
+output(chat[0], 'robot');
+
+setTimeout( ()=> {
+    output(chat[1], 'robot');
+}, 2000);
+
+// 絵文字
+$("#c-img1").on("click",function(){
+  $("#c-img2").show();
+});
+
+$("#c-img2").on("click",function(){
+  $("#c-img3").show();
+});
+
+
+</script>
+</body>
+</html>

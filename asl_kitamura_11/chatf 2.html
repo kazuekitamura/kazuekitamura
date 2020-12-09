@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <link rel="stylesheet" href="css/chat.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Mt.G'sやまびこ</title>
+  </head>
+  <body>
+    <div class=inbody>  
+      <header>  
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <div class="wrapper">
+              <div class="search-area">
+                <form>
+                  <input type="text" id="search-text" placeholder="検索ワードを入力">
+                </form>
+                <div class="search-result">
+                  <div class="search-result__hit-num"></div>
+                  <div id="search-result__list"></div>
+                </div>
+              </div>          
+              <ul class="target-area">
+                <li>登山計画書</li>
+                <li>持ち物チェック</li>
+                <li><a href="http://11kitamura.sakura.ne.jp/jsm_kitamura_11/"></a>MAP</li>
+                <li>お天気</li>
+                <li>おみやげ</li>
+                <li><a href="http://11kitamura.sakura.ne.jp/jsr_kitamura_11/"></a>送信履歴</li>
+                
+              </ul>
+            </div><!-- /.wrapper -->
+          </div>
+        </div>
+          <div class="name"><h1></h1><h2></h2></div>   
+      </header>
+      <main>
+        <!-- コンテンツ表示画面 -->
+          <div id="main-field">
+            <div id="field">
+              <div id='chat_list'></div>
+            <ul id="chat-ul"></ul>
+            <img src="imgs/kuma.jpg" id="c-img2"><!--非表示-->
+          </div>       
+      </main>
+        <!--入力場所，送信ボタン-->
+      <footer>
+        <div class="box">
+            <id id="input-field">
+              <input type='text' id='chat_form'>
+              <button type='button' id='submit'>送信</button>
+              <button type='button' id='ajax'>いどう</button>
+            <!-- <input type="text" id="chatinput" value="">
+            <input type="button" value= "送信" id="chat-button" onclick= "btnFunc()"> -->
+          </div>
+          <div class="hidden_box">
+            <input type="checkbox" id="label1" />
+            <label for="label1"></label>
+            <div class="hidden_show">
+            <!--非表示ここから-->     
+            <img src="imgs/kuma.jpg" id="c-img1">
+            <div id="result"></div>
+            <!--ここまで-->
+          </div>    
+        </div>
+      </div>
+      </footer>
+      </div>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+      apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+      authDomain: "g-skitamura.firebaseapp.com",
+      databaseURL: "https://g-skitamura.firebaseio.com",
+      projectId: "g-skitamura",
+      storageBucket: "g-skitamura.appspot.com",
+      messagingSenderId: "469764883470",
+      appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+    };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src='chatfMain.js'></script>
+
+  </body>
+</html>

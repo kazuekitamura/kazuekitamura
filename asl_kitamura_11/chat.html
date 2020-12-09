@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Mt.G'sやまびこ</title>
+  </head>
+  <body>
+      <!-- 携帯のイラスト    -->
+  <div class="iphone">
+    <img src="imgs/iponeX.png" alt=""class="img1">
+  </div>
+  <div class="view">
+    <div class=inbody> 
+      <header>
+          <!-- ハンバーガーメニュー   -->
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <div class="wrapper">
+              <div class="search-area">
+                <form>
+                  <input type="text" id="search-text" placeholder="検索ワードを入力">
+                </form>
+                <div class="search-result">
+                  <div class="search-result__hit-num"></div>
+                  <div id="search-result__list"></div>
+                </div>
+              </div>          
+              <ul class="target-area">
+                <li><a href="map.html">MAP</a></li>
+              <li><a href="">お天気</a></li>
+              <li><a href="chat.html">ChatRoom</a></li>
+              <li><a href="">登山計画書</a></li>
+              <li><a href="">送信履歴</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="name"><h1></h1><h2></h2></div>   
+      </header>
+      <main>
+        <!-- コンテンツ表示画面 -->
+          <div id="main-field">
+            <div id="field">
+              <!-- <div id='chat_list'></div> -->
+            <ul id="chat-ul"></ul>
+            <img src="imgs/kuma.jpg" id="c-img2"><!--非表示-->
+          </div>       
+      </main>
+        <!--入力場所，送信ボタン-->
+      <footer>
+        <div class="box">
+            <id id="input-field">
+              <input type='text' id='chat_form'>
+              <button type='button' id='submit'>送信</button>
+          </div>
+          <div class="hidden_box">
+            <input type="checkbox" id="label1" />
+            <label for="label1"></label>
+            <div class="hidden_show">
+            <!--非表示ここから-->     
+            <img src="imgs/kuma.jpg" id="c-img1">
+            <img src="imgs/m_06.png" id="m-img1">
+            <div id="result"></div>
+            <!--ここまで-->
+          </div>    
+        </div>
+      </div>
+      </footer>
+      </div>
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+<!--** 以下Firebase **-->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+  <script>
+      var firebaseConfig = {
+    apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+    authDomain: "g-skitamura.firebaseapp.com",
+    databaseURL: "https://g-skitamura.firebaseio.com",
+    projectId: "g-skitamura",
+    storageBucket: "g-skitamura.appspot.com",
+    messagingSenderId: "469764883470",
+    appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+  };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src='chat.js'></script>
+
+  </body>
+</html>

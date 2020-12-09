@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/style2.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+  <title>Mt.G's Map</title>
+</head>
+<body>
+  <header>  
+    <div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+        <div class="wrapper">
+          <div class="search-area">
+            <form>
+              <input type="text" id="search-text" placeholder="検索ワードを入力">
+            </form>
+            <div class="search-result">
+              <div class="search-result__hit-num"></div>
+              <div id="search-result__list"></div>
+            </div>
+          </div>          
+          <ul class="target-area">
+            <li>登山計画書</li>
+            <li>持ち物チェック</li>
+            <li>MAP</li>
+            <li>お天気</li>
+            <li>おみやげ</li>
+            <li>チャット</li>
+            <li>送信履歴</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <h1>MAP</h1>  
+  </header>
+<main>
+    <!-- コンテンツ表示画面 -->
+    <div id="main-field">
+      <!-- <div id="target"></div> -->
+      <div id="gmap"></div><!-- 地図を表示する領域 -->   
+      <div id="map_custmomize"></div>    
+    </div>
+</main>
+<footer>
+    <table>
+      <!-- <tr><th>緯度</th><td id="table_lat"></td></tr>
+      <tr><th>経度</th><td id="table_lon"></td></tr> -->
+    </table>
+</footer>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+      apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+      authDomain: "g-skitamura.firebaseapp.com",
+      databaseURL: "https://g-skitamura.firebaseio.com",
+      projectId: "g-skitamura",
+      storageBucket: "g-skitamura.appspot.com",
+      messagingSenderId: "469764883470",
+      appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+    };
+      
+      firebase.initializeApp(firebaseConfig);
+</script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDAHMjXrLmbR2xJuw3vsDUxRDhu8bOj3OM&callback=initMap" async defer></script>
+    
+  <script src='mapf.js'></script>
+</body>
+</html>

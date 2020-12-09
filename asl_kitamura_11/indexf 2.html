@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/stylef.css">
+<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<header>
+  <h1>Welcome to Mt.G's!</h1>
+</header>
+<main>
+    <!-- <p>Login succeed</p> -->
+    <div class="form-modal">
+        <div class="form-toggle">
+            <button id="login-toggle" onclick="toggleLogin()">log in</button>
+            <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+        </div>
+        <!-- ログイン画面 -->
+        <div id="login-form">
+          <form>
+            <input type="text" id='login_id' placeholder="Choose user id /ユーザーID"/>
+            <input type="password" id='login_password' placeholder="Enter password /パスワード"/>
+            <button type="button" id='login'>login/ログイン</button>           
+          </form>
+        </div>
+        <!-- 新規登録画面 -->
+        <div id="signup-form">
+          <form>
+                <input type="email" placeholder="Enter your email /Eメール"/>
+                <input type="text" id='user_id' placeholder="Enter user id /新規ID"/>
+                <input type="password" id='user_password' placeholder="Enter password /パスワード"/>
+                <button type="button" id="signup">create account/新規登録</button>
+                <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0)">terms of services</a></p>               
+            </form>
+        </div>
+      </div>
+      <div class="box">   
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader"></div>
+      </div>
+    </main>
+ <!--** 以下Firebase **-->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+    authDomain: "g-skitamura.firebaseapp.com",
+    databaseURL: "https://g-skitamura.firebaseio.com",
+    projectId: "g-skitamura",
+    storageBucket: "g-skitamura.appspot.com",
+    messagingSenderId: "469764883470",
+    appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+  };
+firebase.initializeApp(firebaseConfig);
+
+const ref = firebase.database().ref();
+
+// ログイン、新規登録画面の切替
+ function toggleSignup(){
+   document.getElementById("login-toggle").style.backgroundColor="#fff";
+    document.getElementById("login-toggle").style.color="#222";
+    document.getElementById("signup-toggle").style.backgroundColor="#57b846";
+    document.getElementById("signup-toggle").style.color="#fff";
+    document.getElementById("login-form").style.display="none";
+    document.getElementById("signup-form").style.display="block";
+}
+
+function toggleLogin(){
+    document.getElementById("login-toggle").style.backgroundColor="#57B846";
+    document.getElementById("login-toggle").style.color="#fff";
+    document.getElementById("signup-toggle").style.backgroundColor="#fff";
+    document.getElementById("signup-toggle").style.color="#222";
+    document.getElementById("signup-form").style.display="none";
+    document.getElementById("login-form").style.display="block";
+}
+
+
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+  var uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        return true;
+      },
+      uiShown: function() {
+        document.getElementById('loader').style.display = 'none';
+      }
+    },
+    signInFlow: 'popup',
+    signInSuccessUrl: 'mypage.html',
+    signInOptions: [
+  firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  firebase.auth.EmailAuthProvider.PROVIDER_ID,
+],
+  };
+  ui.start('#firebaseui-auth-container', uiConfig);
+
+
+ 
+</script>
+<script src='indexMain.js'></script>
+</body>
+</html>

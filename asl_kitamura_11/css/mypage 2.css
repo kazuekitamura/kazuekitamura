@@ -1,0 +1,330 @@
+
+body {
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-image:url("../imgs/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1000px;
+    height: 1000px;
+    text-align: center;
+}
+/* 携帯画像 */
+.img1 {
+    width: 360px;
+    z-index: 2;
+    position: absolute;
+}
+
+/* 山のイラスト */
+.img2 {
+    width: 300px;
+    z-index: 4;
+    position: relative;
+    top: 10px;
+    left: 5px    
+}
+
+/* 携帯画面背景 */
+.view{
+    background-color: #ebebeb;
+    width: 315px;
+    height: 679px;
+    margin-top: 50px;
+    margin-left: 520px;
+    z-index: 3;
+    position: relative;
+    top: 16px;
+    border-radius: 2em;
+}
+
+.main {
+    height: 600px;
+}
+
+header {
+    width: 100%;
+    height: 200px;
+    color: #757575;
+    font-size: 50px;
+    font-size: bold;
+}
+
+/* Mt.G'Mypageロゴ */
+.wrapper {
+    font-size: 50px;
+    color: #3f4741;
+    margin: 20px 10px;
+    z-index: 7;
+    position: relative;
+    top: -310px;
+}
+
+/* Myログインネーム */
+h1 {
+    font-size: 50px;
+    color: #3f4741;
+    margin: 20px 10px;
+    z-index: 7;
+    position: relative;
+    top: -270px;
+    font-size: bold;
+}
+
+/* ここからお友達検索・リストフォーム */
+form {
+    background: #fff;
+}
+
+.form-modal{
+    position:relative;
+    z-index: 8;
+    width: 100%;
+    height:auto;
+    margin-top:4em;
+    left:50%;
+    transform:translateX(-50%);
+    background:#fff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1)
+}
+
+/* 検索・リスト切替ボタン */
+.form-modal button{
+    cursor: pointer;
+    position: relative;
+    text-transform: capitalize;
+    font-size:1em;
+    z-index: 2;
+    outline: none;
+    background:#fff;
+    transition:0.2s; 
+}
+
+.form-toggle button {
+    width: 50%;
+    float: left;
+    padding: 1em;
+    margin-bottom: 1em;
+    border: none;
+    transition: 0.2s;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;  
+}
+
+/* 切替ボタンの丸み */
+.form-toggle button:nth-child(1){
+    border-bottom-right-radius: 20px;
+}
+
+.form-toggle button:nth-child(2){
+    border-bottom-left-radius: 20px;
+}
+/* 検索からメニュー切替ボタン */
+button#search-toggle {
+    padding: 15px;
+    margin-bottom: 1em;
+    background:#57b846;
+    color:#ffff;
+}
+.form-modal .search , .form-modal .list{
+    background:#57b846;
+    color:#fff;
+}
+
+.form-toggle{
+    position: relative;
+    width:100%;
+    height:auto;
+}
+
+.form-modal form{
+    position: relative;
+    width:90%;
+    height:auto;
+    left:50%;
+    transform:translateX(-50%);  
+}
+
+#search-form {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.5px;
+    background: #fff;
+    border-radius: 17px;
+}
+
+#list-form{
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: 17px;
+    display: none;
+}
+
+/* お友達検索結果、リスト */
+#search_result,#friends_list {
+    font-size: 20px;
+    margin-top: 15px;
+    line-height: 25px;
+}
+#friends_list:hover {
+    color: rgb(144, 34, 54);
+    cursor: pointer;
+}
+
+/* 検索ボタン */
+#search-form button {
+    width: 100%;
+    margin-top: 0.5em;
+    padding: 0.6em;
+    background: rgb(212, 235, 247);
+    color: rgb(48, 46, 46);
+
+}
+
+/* 検索ボタンホバー */
+#search-form button:hover{
+    background: rgb(178, 217, 236);
+}
+/* メニューリストボタンを消す */
+#map,#history {
+    margin-top:0.5em;
+    padding:0.6em;
+    border: none;
+}
+
+/* Myメニュー検索リスト */
+#map,#history{
+    font-size: 16px;
+    border: none;
+    text-align: left;
+    margin: 0 0 0 -30px;
+    /* color: gray; */
+    letter-spacing: .2em;
+    /* font-weight: bold; */
+}
+#map:hover,#history:hover{
+    color:rgb(20, 156, 93);
+}
+
+/* 検索入力フォーム */
+.form-modal input{
+    position: relative;
+    width:80%;
+    font-size:1em;
+    padding:1.2em 1.7em 1.2em 1.7em;
+    margin-top:0.6em;
+    margin-bottom:0.6em;
+    border-radius: 20px;
+    border:none;
+    background:#ebebeb;
+    outline:none;
+    font-weight: bold;
+    transition:0.4s;
+}
+
+.form-modal p{
+    font-size:16px;
+    font-weight: bold;
+}
+
+.form-modal p a{
+    color:#57b846;
+    text-decoration: none;
+    transition:0.2s;
+}
+
+.form-modal i {
+    position: absolute;
+    left:10%;
+    top:50%;
+    transform:translateX(-10%) translateY(-50%); 
+}
+
+/* 検索メニュー */
+.min_wrapper{
+    font-size: px;
+    color: #3f4741;
+    margin: 20px 10px;
+    z-index: 7;
+    position: relative;
+    top: -20px;
+    text-align: left;
+}
+.search-area input[type="text"] {
+    padding: 5px 5px 3px;
+    font-size: 16px;
+    border: 1px solid #D6D6D6;
+    margin: 20px 10px;
+  }
+/* Myメニュー検索結果 */
+  a {
+    text-decoration: none;
+    color: slategrey;
+  }
+
+  a:hover {
+      color: tomato;
+  } 
+  
+  .search-area input[type="text"]:focus {
+    background: #F9F9F9;
+  }
+   /* Myメニューリスト検索結果 */
+  .search-result {
+    margin-top: 20px;
+  }
+  .hit-num__text span {
+    font-weight: bold;
+  }
+  
+  #search-result__list {
+    margin-top: 15px;
+  }
+  
+  #search-result__list span {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 5px;
+    background: #F2F2F2;
+  }
+  
+  .target-area {
+    margin-top: 20px;
+  }
+  
+  .target-area .hidden {
+    display: none
+  }
+
+  
+
+
+
+/* ログアウトボタン */
+button#logout {
+    width: 90%;
+    height: 45px;
+    margin: 7px;
+    font-size: 20px;
+    border-radius: 3px;
+    color: gray;
+    background: #d4d3d3;
+    margin-top: 0.5em;
+    padding: 0.6em;
+
+}
+
+ /* ログアウトボタン ホバー */  
+button#logout:hover {
+    cursor: pointer;
+    background: #9e9d9d;
+    box-shadow: 4px 4px rgb(88, 89, 90);
+}    

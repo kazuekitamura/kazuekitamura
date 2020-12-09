@@ -1,0 +1,299 @@
+body {
+    background-size: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    background-blend-mode: lighten;
+    text-align: center;
+}
+
+ul {
+    margin: 20px;
+    list-style: none;
+    text-align: center;
+}
+
+li {
+    font-size: 20px;
+}
+
+/* ログインボックス */
+#key{
+    width: 220px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.box {
+    margin: 10px 270px;
+    text-align: center;   
+}
+
+.container {
+    width: 800px;
+    border-radius: 4px;
+    padding: 16px;
+    position: relative;
+    border: 9px sold rgb(100, 121, 238);
+    margin: auto 0;
+    
+}
+
+#question {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;   
+}
+
+p {
+    line-height: 2em;
+    font-size: 20px;
+}
+
+#choices {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    font-weight: bold;
+    background-color:rgba(#f8f8f8 0.5);
+    text-align: left;
+}
+
+#choices li {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#choices li:hover {
+    background: #f8f8f8;
+}
+
+#choices li.correct {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    font-weight: bold;
+}
+
+#choices li.correct::after {
+    content: '．．．チッやるじゃないか！';
+}
+
+#choices li.wrong {
+    background: #f8d8da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    font-weight: bold;
+}
+
+#choices li.wrong::after {
+    content: ' ．．．ケッまだまだだな';
+}
+
+#btn.disabled {
+    background: #ccc;
+    box-shadow: 0 4px 0 #bbb;
+    opacity: 0.7;
+}
+
+#list1 {
+    font-size: 30px;
+}
+
+#result {
+    position: absolute;
+    width: 300px;
+    background:  #fff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 4px;
+    text-align: center;
+    transition: 0.4s;
+    font-size: 20px;
+}
+/* リザルトがShow Scoreを押した時に表示される */
+#result.hidden {
+    transform: translateY(-800px);
+}
+
+#result p {
+    font-size: 20px;
+}
+
+#result a {
+    display: block;
+    text-decoration: none;
+}
+
+#scoreComment {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#login {
+    background: rgba(255,202,128);
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: grey;
+    box-shadow: 0 4px 0 #e29333;
+    margin-bottom: 10px;
+    border: none;
+}
+
+/* #next, {
+    background: #3498db;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 0 #2880b9;
+    margin-bottom: 10px;
+    border: none;
+} */
+
+
+#result .return {
+    background: #41b15d;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 0 #1b8628;
+    margin-bottom: 10px;
+}
+
+.list2 {
+    position: absolute;
+    width: 300px;
+    background:  #fff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 4px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+/* リザルトの開閉 */
+.focus {
+    outline: 2px solid #006599;
+}
+
+#hook {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+    color: #fff;
+    background: #3498db;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px 0 #2880b9;
+    margin-bottom: 10px;
+    border: none;
+}
+
+#panel {
+    transition: .2s height ease-out,  .2s visibility ease-out;
+    overflow: hidden;
+}
+
+.innerox {
+    padding: 10px;
+    border: solid #ccc;
+    border-width: 0 2px 2px;
+}
+
+.inner {
+    font-size: 20px;
+}
+
+.hidden {
+    height: 0 !important; 
+    display: block; 
+    /* // ポイント。hidden属性がついていない元々の状態の時に充てておいてもよい。 */
+    visibility: hidden;
+}  
+
+/* 文字が落ちてくる */
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,300,600,700,800);
+
+h1 {
+  margin-top: 0px;
+  padding: 10px;
+  font-family: 'Raleway';
+  font-weight: 400;
+  font-size: 2.5em;
+  color: #9A12B3;
+}
+
+
+
+.letterDrop {
+  position: relative;
+  top: 0;  
+  display: inline-block;
+  text-transform: uppercase; 
+  letter-spacing: 0.5em;
+  opacity: 0.8;
+  transform: rotateX(-90deg);
+  animation: letterDrop 1.2s ease 1 normal forwards;
+}
+
+@keyframes letterDrop {
+    10% {
+        opacity: 0.5;
+    }
+    20% {
+        opacity: 0.8;
+        top: 3.75em;
+        transform: rotateX(-360deg);
+    }
+    100% {
+        opacity: 1;
+        top: 4.50em;
+        transform: rotateX(360deg);
+    }
+}
+
+
+span:nth-child(2n) {
+  color: #663399;
+}
+
+/* クリックするとアニメーション */
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    background-image: radial-gradient(#666, #333);
+}
+
+#instructions {
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    padding-bottom: 6px;
+    font-family: sans-serif;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+}

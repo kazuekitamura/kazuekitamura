@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/history.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+<title>Chatアプリ送信履歴</title>
+</head>
+<body>
+<div class=inbody>  
+<header>  
+  <div id="nav-drawer">
+    <input id="nav-input" type="checkbox" class="nav-unshown">
+    <label id="nav-open" for="nav-input"><span></span></label>
+    <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+    <div id="nav-content">
+      <div class="wrapper">
+        <div class="search-area">
+          <form>
+            <input type="text" id="search-text" placeholder="検索ワードを入力">
+          </form>
+          <div class="search-result">
+            <div class="search-result__hit-num"></div>
+            <div id="search-result__list"></div>
+          </div>
+        </div>          
+        <ul class="target-area">
+          <li>登山計画書</li>
+          <li>持ち物チェック</li>
+          <li>MAP</li>
+          <li>お天気</li>
+          <li>おみやげ</li>
+          <li>チャット</li>
+          <li>送信履歴</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <h1>送信履歴</h1>  
+</header>
+<main>
+  <!-- コンテンツ表示画面 -->
+  <div id="main-field">
+    <div id="output"></div>
+  </div>
+</main>
+<footer>
+</footer>
+</div>
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+<!-- MAPKEY -->
+​<script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCj-YtUQm8S6dCvFmsNsW9y9px8JG35F7c&callback=initMap" async defer></script>
+<!--** 以下Firebase **-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase.js"></script>
+​
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyA3qK_mc4_I46rqMmdKDIf8bvLhUWQA_gs",
+          authDomain: "g-skitamura.firebaseapp.com",
+          databaseURL: "https://g-skitamura.firebaseio.com",
+          projectId: "g-skitamura",
+          storageBucket: "g-skitamura.appspot.com",
+          messagingSenderId: "469764883470",
+          appId: "1:469764883470:web:1b9e006ae92b44a8a0a85f"
+        };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+  const ref = firebase.database().ref();
+
+// 検索メニュー  
+  $(function () {
+  searchWord = function(){
+    var searchText = $(this).val(), // 検索ボックスに入力された値
+        targetText;
+
+    $('.target-area li').each(function() {
+      targetText = $(this).text();
+
+      // 検索対象となるリストに入力された文字列が存在するかどうかを判断
+      if (targetText.indexOf(searchText) != -1) {
+        $(this).removeClass('hidden');
+      } else {
+        $(this).addClass('hidden');
+      }
+    });
+  };
+
+  // searchWordの実行
+  $('#search-text').on('input', searchWord);
+});
+ 
+$("#chat-button").on("click",function(){
+  const uname = $("#uname").val();
+    const text  = $("#chatinput").val();
+    let d = new Date();
+    console.log(d.toString());
+      let year = d.getFullYear();
+      let month = d.getMonth() + 1;
+      let day = d.getDate();
+      let dayofweek = d.getDay();
+      const dayname = ['日','月','火','水','木','金','土'];
+      console.log(year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']');
+      console.log(d.toString());
+      let hour = d.getHours();
+      let minute = d.getMinutes();
+      let second = d.getSeconds();
+      let millisecond = d.getMilliseconds();
+      console.log(hour + '時' + minute + '分' + second + '.' + millisecond + '秒');
+      console.log(uname+text+year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']');
+      const msg = {
+        uname: uname,
+        text: text,
+        date: year + '年' + month + '月' + day + '日' + '[' + dayname[dayofweek] + ']',
+        time: hour + '時' + minute + '分' + second + '.' + millisecond + '秒'
+    };
+    ref.push(msg); //firebase関数
+});
+  
+//送信処理
+$("#chat-button").on("click",function(){
+    const uname = $("#uname").val();
+    const text = $("#chatinput").val();
+    const lat = $("#lat").val();
+    const lon = $("#lon").val();
+    const msg = {
+        uname: uname,
+        text: text,
+    };
+    ref.push(msg);
+});
+  
+$("#chatinput").on("keydown",function(e){
+    console.log(e);
+    if(e.keyCode==13){
+      const uname = $("#uname").val();
+      const text = $("#chatinput").val();
+    //   const lat = $("#lat").val();
+    // const lon = $("#lon").val();
+      const msg = {
+          uname: uname,
+          text: text,
+      };
+      ref.push(msg);
+    }
+});
+  
+// 受信処理
+ref.on("child_added",function(data){
+      const v = data.val();
+      const k = data.key;
+      const h = '<p>'+v.uname+'<br>'+v.text+'<br>'+v.date+'<br>'+v.time+'</p>';
+      $("#output").append(h).animate(
+        { scrollTop: $("#output").get(0).scrollHeight },
+    );;
+  });
+
+
+</script>
+</body>
+</html>
