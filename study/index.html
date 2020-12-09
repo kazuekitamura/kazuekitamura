@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript1</title>
+    <style>
+        /* flex-wrap: wrap;要素が多くなった時に折り返す */
+        body{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        /* transition: 0.8s;アニメーションにかける時間 */
+        /* text-align: center,line-height: 100px;で左右中央揃えになる */
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: cadetblue;
+            cursor: pointer;
+            transition: 0.8s;
+            margin: 8px 8px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        /* transform: rotate(360deg); 360度回転*/
+        .circle {
+            background: pink;
+            border-radius: 50%;
+            transform: rotate(360deg);
+        }
+        .win {
+            background: pink;
+            border-radius: 50%;
+            transform: rotate(360deg);
+        }
+        /* winと比較して少し小さくする */
+        .lose {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="box" id="target1"></div> -->
+    <!-- <div class="box" id="target2"></div>
+    <div class="box" id="target3"></div> --> 
+
+ <script>
+     'use strict';
+    //５つの箱(num)当たりが一つ
+//     const num = 5;
+//     const winner = Math.floor(Math.random() * num);//0-4
+
+//    for (let i = 0; i < num; i++ ) {
+//         const div = document.createElement('div');
+//         div.classList.add('box');
+//         //　iとwinnerwoを比べて当たり判定をする    
+//         div.addEventListener('click', () => {
+//             if (i === winner) {
+//                 div.textContent ='Win!';
+//                 div.classList.add('win');
+//             } else{
+//                 div.textContent ='Lose!';
+//                 div.classList.add('lose');
+//             }
+//         });
+    
+
+
+
+    //for文で繰り返し処理を行う。０から始まり９まで1づつ増える
+    //textに数をかぞえる
+    for (let i = 0; i < 100; i++ ) {
+        const div = document.createElement('div');
+        div.classList.add('box');
+        //textContentでテキストに数を表示して数えるdivの中身のテキストをカウンターのiにする
+        div.textContent = i;
+        div.addEventListener('click', () => {
+        div.classList.toggle('circle');
+        });
+
+        
+    // JavaScriptだけで要素を作る。constでdivの要素名を渡して定数とする
+    // const div = document.createElement('div');
+    //今回作りたいdivにはboxクラスがついているのでdivに対して
+        // div.classList.add('box');//boxクラスが追加
+        // div.addEventListener('click',() => {
+        // div.classList.toggle('circle');
+        // });
+    // ブラウザに表示するには、bodyの子要素として追加する
+    document.body.appendChild(div);
+    }
+    
+        
+
+
+    //'target'の要素に対して（document.getElementByIdadd）で指定する、add追加する(dbclickダブルクリック
+
+    //  =>アロー関数
+    //  document.getElementById('target').addEventListener('click',() => {
+        //  document.getElementById('target').style.background = 'pink';色を変える
+        //  document.getElementById('target').style.borderRadius = '50%';丸にする
+        // document.getElementById('target').classList.add('circle');//circleクラスを用意する
+        // document.getElementById('target').classList.toggle('circle');//toggleもう一度クリックすると元に戻る
+    // });
+     //何度も使う場合は定数constを使う好きな名前をつける今回はtargetとする。割り当てたい値を＝で結ぶ
+     //変更する場合('target')の中、１箇所を変えればいいだけなので便利
+
+    
+    //  const target1 = document.getElementById('target1');
+    //  const target2 = document.getElementById('target2');
+    //  const target3 = document.getElementById('target3');
+
+    //     target1.addEventListener('click', () => {
+    //     target1.classList.toggle('circle');
+    // });    
+    //     target2.addEventListener('click', () => {
+    //     target2.classList.toggle('circle');
+    // });    
+    //     target3.addEventListener('click', () => {
+    //     target3.classList.toggle('circle');
+    // });    
+
+</script>
+<script src="js/main.js"></script>
+    
+</body>
+</html>
